@@ -7,15 +7,19 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: black; color: white; font-family: Arial, sans-serif; }
-        .slider-container { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
-        .slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s; }
+        .slider-container { position: relative; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s, transform 1s; transform: translateX(100%); }
+        .active { opacity: 1; transform: translateX(0); }
         .slide img { max-width: 90vw; max-height: 70vh; border-radius: 10px; box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3); }
-        .caption { position: absolute; bottom: 10%; width: 80%; text-align: center; font-size: 1.5rem; background: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 5px; }
-        .active { opacity: 1; }
+        .caption { position: absolute; bottom: 10%; width: 80%; text-align: center; font-size: 1.5rem; background: rgba(0, 0, 0, 0.8); padding: 15px; border-radius: 10px; font-weight: bold; text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5); border: 2px solid rgba(255, 255, 255, 0.7); }
+        .controls { position: absolute; width: 100%; top: 50%; display: flex; justify-content: space-between; transform: translateY(-50%); }
+        .control { background: rgba(255, 255, 255, 0.5); border: none; font-size: 2rem; cursor: pointer; padding: 10px 20px; border-radius: 5px; }
+        .control:hover { background: rgba(255, 255, 255, 0.8); }
     </style>
 </head>
 <body>
     <div class="slider-container">
+        <button class="control" id="prev">❮</button>
         <div class="slide active">
             <img src="https://fwcdn.pl/fpo/58/98/105898/6954823_2.10.webp" alt="Cindarella Story">
             <div class="caption">Cindarella Story - Współczesna wersja Kopciuszka. Wykorzystywana przez macochę Sam Montgomery poznaje internetowego amanta na szkolnej potańcówce.</div>
@@ -36,16 +40,22 @@
             <img src="https://fwcdn.pl/fpo/75/52/107552/7587657_2.3.jpg" alt="Dziewczyna z sąsiedztwa">
             <div class="caption">Dziewczyna z sąsiedztwa - Matthew, szkolny prymus, zakochuje się w swojej sąsiadce, która okazuje się być gwiazdką porno.</div>
         </div>
+        <button class="control" id="next">❯</button>
     </div>
     <script>
         let index = 0;
         const slides = document.querySelectorAll(".slide");
-        function showSlide() {
-            slides.forEach(slide => slide.classList.remove("active"));
+        const next = document.getElementById("next");
+        const prev = document.getElementById("prev");
+
+        function showSlide(newIndex) {
+            slides[index].classList.remove("active");
+            index = (newIndex + slides.length) % slides.length;
             slides[index].classList.add("active");
-            index = (index + 1) % slides.length;
         }
-        setInterval(showSlide, 4000);
+
+        next.addEventListener("click", () => showSlide(index + 1));
+        prev.addEventListener("click", () => showSlide(index - 1));
     </script>
 </body>
 </html>
