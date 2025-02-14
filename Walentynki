@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmowe Propozycje</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: black; color: white; font-family: Arial, sans-serif; }
+        .slider-container { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+        .slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s; }
+        .slide img { max-width: 90vw; max-height: 70vh; border-radius: 10px; box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3); }
+        .caption { position: absolute; bottom: 10%; width: 80%; text-align: center; font-size: 1.5rem; background: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 5px; }
+        .active { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slide active">
+            <img src="https://fwcdn.pl/fpo/58/98/105898/6954823_2.10.webp" alt="Cindarella Story">
+            <div class="caption">Cindarella Story - Współczesna wersja Kopciuszka. Wykorzystywana przez macochę Sam Montgomery poznaje internetowego amanta na szkolnej potańcówce.</div>
+        </div>
+        <div class="slide">
+            <img src="https://fwcdn.pl/fpo/57/19/375719/7307065_2.3.jpg" alt="Księżniczka i Żaba">
+            <div class="caption">Baśniowa, przepełniona jazzową muzyką opowieść o dziewczynie z Nowego Orleanu i księciu zamienionym w żabę, desperacko pragnącym być znów człowiekiem.</div>
+        </div>
+        <div class="slide">
+            <img src="https://fwcdn.pl/fpo/19/87/751987/7722185_1.3.jpg" alt="Randka w ciemno">
+            <div class="caption">Romantyczna Ania bierze udział w reality show ukazującym prawdziwą twarz facetów flirtujących w sieci i wyśmiewającym naiwność kobiet szukających tam ideału.</div>
+        </div>
+        <div class="slide">
+            <img src="https://fwcdn.pl/fpo/21/98/392198/7199671_2.8.webp" alt="Moja dziewczyna wychodzi za mąż">
+            <div class="caption">Moja dziewczyna wychodzi za mąż - Kobieciarz Tom zostaje honorowym drużbą swojej najlepszej przyjaciółki. Podczas przygotowań do ślubu uświadamia sobie, że jest zakochany w przyszłej pannie młodej.</div>
+        </div>
+        <div class="slide">
+            <img src="https://fwcdn.pl/fpo/75/52/107552/7587657_2.3.jpg" alt="Dziewczyna z sąsiedztwa">
+            <div class="caption">Dziewczyna z sąsiedztwa - Matthew, szkolny prymus, zakochuje się w swojej sąsiadce, która okazuje się być gwiazdką porno.</div>
+        </div>
+    </div>
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll(".slide");
+        function showSlide() {
+            slides.forEach(slide => slide.classList.remove("active"));
+            slides[index].classList.add("active");
+            index = (index + 1) % slides.length;
+        }
+        setInterval(showSlide, 4000);
+    </script>
+</body>
+</html>
